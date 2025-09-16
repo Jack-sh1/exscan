@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import InputSection from './components/InputSection';
 import Loading from './components/Loading';
 import ResultCard from './components/ResultCard';
+import HistorySection from './components/HistorySection';
 import { exTypes, typeDescriptions, poisonousChickenSoup } from './data/reportData';
 import { getRandomItem, getValueByKey } from './utils/getRandom';
+import { saveToHistory, getHistory, type HistoryItem } from './utils/localStorage';
 import type { Report } from './data/reportData';
 
 type AppState = 'input' | 'loading' | 'result';
@@ -11,6 +13,12 @@ type AppState = 'input' | 'loading' | 'result';
 function App() {
   const [currentState, setCurrentState] = useState<AppState>('input');
   const [report, setReport] = useState<Report | null>(null);
+  const [history, setHistory] = useState<HistoryItem[]>([]);
+
+  // 加载历史记录
+  useEffect(() => {
+    setHistory(getHistory());
+  }, []);
 
   const handleStartAnalysis = (input: string) => {
     setCurrentState('loading');
@@ -32,6 +40,11 @@ function App() {
 
   const handleLoadingComplete = () => {
     setCurrentState('result');
+    // 保存到历史记录
+    if (report) {
+      saveToHistory(report);
+      setHistory(getHistory()); // 更新历史记录状态
+    }
   };
 
   const handleRestart = () => {
@@ -39,14 +52,32 @@ function App() {
     setReport(null);
   };
 
+  const handleHistoryUpdate = () => {
+    setHistory(getHistory());
+  };
+
+  const handleSelectHistory = (item: HistoryItem) => {
+    // 将历史记录转换为Report格式
+    const { timestamp, id, ...reportData } = item;
+    setReport(reportData);
+    setCurrentState('result');
+  };
+
   return (
     <div className="min-h-screen py-8 px-4">
       <div className="container mx-auto">
         {currentState === 'input' && (
-          <InputSection 
-            onStartAnalysis={handleStartAnalysis}
-            isAnalyzing={false}
-          />
+          <>
+            <InputSection 
+              onStartAnalysis={handleStartAnalysis}
+              isAnalyzing={false}
+            />
+            <HistorySection 
+              history={history}
+              onHistoryUpdate={handleHistoryUpdate}
+              onSelectHistory={handleSelectHistory}
+            />
+          </>
         )}
         
         {currentState === 'loading' && (
