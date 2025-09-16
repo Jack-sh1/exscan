@@ -1,69 +1,174 @@
-# React + TypeScript + Vite
+# 前任检测仪 (ExScan)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+一个基于 React + TypeScript + Tailwind CSS 的娱乐性前任类型检测应用。
 
-Currently, two official plugins are available:
+## 🎯 项目简介
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+前任检测仪是一个轻松有趣的Web应用，用户可以输入前任的相关信息，系统会随机生成一个幽默的前任类型分析报告，包含类型描述和"毒鸡汤"建议。
 
-## Expanding the ESLint configuration
+## ✨ 功能特性
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 🎨 **现代化UI设计**：粉紫渐变主题，响应式布局
+- 🎲 **随机检测系统**：12种不同的前任类型
+- ⏳ **加载动画**：优雅的检测过程展示
+- 🔄 **重新测试**：支持多次检测
+- 📱 **响应式设计**：完美适配各种设备
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ 技术栈
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- **前端框架**：React 18
+- **类型系统**：TypeScript
+- **样式框架**：Tailwind CSS 3.4.17
+- **构建工具**：Vite
+- **包管理器**：pnpm
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 📦 项目结构
+
+```
+ExScan/
+├── src/
+│   ├── components/          # 组件目录
+│   │   ├── InputSection.tsx # 输入组件
+│   │   ├── Loading.tsx      # 加载组件
+│   │   └── ResultCard.tsx   # 结果展示组件
+│   ├── data/
+│   │   └── reportData.ts    # 数据配置
+│   ├── utils/
+│   │   └── getRandom.ts     # 工具函数
+│   ├── App.tsx              # 主应用组件
+│   ├── main.tsx             # 应用入口
+│   └── index.css            # 全局样式
+├── public/                  # 静态资源
+├── package.json             # 项目配置
+├── tailwind.config.js       # Tailwind配置
+└── vite.config.ts           # Vite配置
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 快速开始
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 环境要求
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Node.js >= 16
+- pnpm >= 7
+
+### 安装依赖
+
+```bash
+pnpm install
 ```
+
+### 启动开发服务器
+
+```bash
+pnpm dev
+```
+
+访问 http://localhost:5173 查看应用
+
+### 构建生产版本
+
+```bash
+pnpm build
+```
+
+### 预览生产版本
+
+```bash
+pnpm preview
+```
+
+## 📋 SOP 操作流程
+
+### 开发流程 SOP
+
+#### 1. 环境准备
+- [ ] 确保 Node.js 版本 >= 16
+- [ ] 安装 pnpm 包管理器
+- [ ] 克隆项目到本地
+- [ ] 执行 `pnpm install` 安装依赖
+
+#### 2. 开发启动
+- [ ] 执行 `pnpm dev` 启动开发服务器
+- [ ] 浏览器访问 http://localhost:5173
+- [ ] 确认应用正常加载和运行
+
+#### 3. 功能测试
+- [ ] 测试输入功能：输入任意文本
+- [ ] 测试加载动画：观察2.5秒加载过程
+- [ ] 测试结果展示：查看随机生成的检测报告
+- [ ] 测试重新检测：点击"再测一次"按钮
+- [ ] 测试响应式：在不同设备尺寸下验证布局
+
+#### 4. 代码规范检查
+- [ ] 执行 `pnpm lint` 检查代码规范
+- [ ] 确保 TypeScript 类型检查通过
+- [ ] 验证 Tailwind CSS 样式正确应用
+
+#### 5. 构建部署
+- [ ] 执行 `pnpm build` 构建生产版本
+- [ ] 执行 `pnpm preview` 预览构建结果
+- [ ] 确认构建产物无错误
+- [ ] 部署到目标环境
+
+### 用户使用流程 SOP
+
+#### 1. 访问应用
+- [ ] 打开浏览器访问应用地址
+- [ ] 确认页面正常加载
+
+#### 2. 输入信息
+- [ ] 在输入框中输入前任相关信息
+- [ ] 点击"开始检测"按钮
+
+#### 3. 等待检测
+- [ ] 观看加载动画（约2.5秒）
+- [ ] 等待检测完成
+
+#### 4. 查看结果
+- [ ] 阅读检测报告
+- [ ] 查看前任类型和描述
+- [ ] 阅读"毒鸡汤"建议
+
+#### 5. 重新测试（可选）
+- [ ] 点击"再测一次"按钮
+- [ ] 返回输入界面
+- [ ] 重复上述流程
+
+## 🎮 使用说明
+
+1. **输入阶段**：在文本框中输入任何关于前任的信息
+2. **检测阶段**：点击"开始检测"，享受2.5秒的加载动画
+3. **结果阶段**：查看随机生成的前任类型分析报告
+4. **重新测试**：点击"再测一次"进行新的检测
+
+## 🎨 设计特色
+
+- **渐变背景**：粉紫色调营造温馨氛围
+- **毛玻璃效果**：现代化的视觉层次
+- **动画交互**：流畅的用户体验
+- **响应式布局**：适配各种屏幕尺寸
+
+## 📝 数据配置
+
+应用包含12种前任类型：
+- 控制狂、冷暴力专家、妈宝男/女、花心大萝卜
+- 直男癌晚期、公主病患者、工作狂、游戏沉迷者
+- 社交恐惧症、完美主义者、拖延症重度患者、情绪不稳定者
+
+每种类型都配有幽默的描述和"毒鸡汤"建议。
+
+## 🤝 贡献指南
+
+1. Fork 本项目
+2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 开启 Pull Request
+
+## 📄 许可证
+
+本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情
+
+---
+
+**注意**：本应用仅供娱乐，检测结果为随机生成，请勿当真！😄
